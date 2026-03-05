@@ -3,7 +3,7 @@ defmodule MDExCustomHeadingId.MixProject do
 
   @app :mdex_custom_heading_id
   @project_url "https://github.com/halostatue/mdex_custom_heading_id"
-  @version "1.0.0"
+  @version "1.0.1"
 
   def project do
     [

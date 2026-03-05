@@ -71,8 +71,12 @@ defmodule MDExCustomHeadingId do
   """
   def attach(document, _options \\ []) do
     document
-    |> Document.append_steps(custom_header_ids: &process_headers/1)
-    |> Document.put_options(render: [unsafe: true])
+    |> Document.append_steps(custom_header_ids_enable_unsafe: &enable_unsafe/1)
+    |> Document.append_steps(custom_header_ids_process: &process_headers/1)
+  end
+
+  defp enable_unsafe(document) do
+    Document.put_render_options(document, unsafe: true)
   end
 
   defp process_headers(document) do
