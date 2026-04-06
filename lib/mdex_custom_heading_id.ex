@@ -3,9 +3,9 @@ defmodule MDExCustomHeadingId do
   MDEx plugin to support custom heading IDs using `{#id}` syntax.
 
   Transforms heading Markdown with the widely accepted `{#id}` syntax into a heading HTML
-  with the custom ID, optionally prefixed by the `:header_ids` extension option (see
-  `t:MDEx.Document.options/0`). Automatically enables unsafe HTML rendering (required for
-  rendering HTML in a plugin).
+  with the custom ID, optionally prefixed by the `:header_id_prefix` (the new name for
+  `:header_ids`) extension option (see `t:MDEx.Document.options/0`). Automatically enables
+  unsafe HTML rendering (required for rendering HTML in a plugin).
 
   The `{#id}` marker must be at the end of the heading and preceded by at least one space.
   IDs may contain only letters, numbers, hyphens, and underscores (a subset of valid HTML
@@ -29,7 +29,8 @@ defmodule MDExCustomHeadingId do
   iex> MDEx.to_markdown!(doc)
   ~S(<h2><a href="#custom-id" aria-hidden="true" class="anchor" id="custom-id"></a>Match</h2>)
 
-  iex> doc = MDEx.new(markdown: ~S"## Match {#custom}", plugins: [MDExCustomHeadingId], extension: [header_ids: "user-content-"])
+  # Use `header_ids` with MDEx <= 0.12.0
+  iex> doc = MDEx.new(markdown: ~S"## Match {#custom}", plugins: [MDExCustomHeadingId], extension: [header_id_prefix: "user-content-"])
   iex> MDEx.to_html!(doc)
   ~S(<h2><a href="#user-content-custom" aria-hidden="true" class="anchor" id="user-content-custom"></a>Match</h2>)
 
@@ -80,10 +81,11 @@ defmodule MDExCustomHeadingId do
   end
 
   defp process_headers(document) do
+    options = Document.get_option(document, :extension, [])
+
     prefix =
-      document
-      |> Document.get_option(:extension, [])
-      |> Keyword.get(:header_ids, "")
+      Keyword.get(options, :header_id_prefix) ||
+        Keyword.get(options, :header_ids)
 
     Document.update_nodes(document, MDEx.Heading, &process_heading(&1, prefix))
   end
