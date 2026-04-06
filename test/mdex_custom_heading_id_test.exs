@@ -52,7 +52,7 @@ defmodule MDExCustomHeadingIdTest do
     test "applies configured prefix to custom ID" do
       html =
         MDEx.to_html!("# Title {#custom}",
-          extension: [header_ids: "user-content-"],
+          extension: [header_id_prefix: "user-content-"],
           plugins: [MDExCustomHeadingId]
         )
 
@@ -63,7 +63,7 @@ defmodule MDExCustomHeadingIdTest do
     test "works without prefix" do
       html =
         MDEx.to_html!("# Title {#custom}",
-          extension: [header_ids: ""],
+          extension: [header_id_prefix: ""],
           plugins: [MDExCustomHeadingId]
         )
 
