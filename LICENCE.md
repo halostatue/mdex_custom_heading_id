@@ -1,8 +1,11 @@
 # Licence
-- SPDX-License-Identifier: [Apache-2.0][spdx-apache]
 
-`MDExCustomHeadingId` is copyright 2026 Austin Ziegler
-and is licensed under the [Apache License, version 2.0](licences/APACHE-2.0.txt).
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+`MDExCustomHeadingId` is copyright 2026 Austin Ziegler and is licensed under the
+[Apache License, version 2.0](licences/APACHE-2.0.txt).
+
+- SPDX Licence: [Apache-2.0][apache-2]
 
 ## Developer Certificate of Origin
 
@@ -21,5 +24,6 @@ The `Signed-off-by` trailer can be automatically added by git with the `-s` or
 ```sh
 git commit --signoff
 ```
-[spdx-apache]: https://spdx.org/licenses/Apache-2.0.html
+
+[apache-2]: https://spdx.org/licenses/Apache-2.0.html
 [trailer]: https://git-scm.com/docs/git-interpret-trailers

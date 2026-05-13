@@ -21,7 +21,7 @@ defmodule MDExCustomHeadingId.MixProject do
       test_coverage: test_coverage(),
       elixirc_paths: elixirc_paths(Mix.env()),
       dialyzer: [
-        plt_add_apps: [:mix],
+        plt_add_apps: [:credo, :mix],
         plt_local_path: "priv/plts/project.plt",
         plt_core_path: "priv/plts/core.plt"
       ]
@@ -29,9 +29,7 @@ defmodule MDExCustomHeadingId.MixProject do
   end
 
   def application do
-    [
-      extra_applications: [:logger]
-    ]
+    [extra_applications: [:logger]]
   end
 
   def cli do
@@ -63,12 +61,15 @@ defmodule MDExCustomHeadingId.MixProject do
 
   defp deps do
     [
+      {:castore, "~> 1.0", optional: true},
       {:mdex, "~> 0.11"},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.18", only: [:test]},
       {:ex_doc, "~> 0.29", only: [:dev, :test], runtime: false},
-      {:quokka, "~> 2.6", only: [:dev, :test], runtime: false}
+      {:excoveralls, "~> 0.18", only: [:test]},
+      {:mix_audit, "~> 2.1", only: [:dev, :test]},
+      {:quokka, "~> 2.6", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.14", only: [:dev, :test]}
     ]
   end
 
